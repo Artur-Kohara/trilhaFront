@@ -34,6 +34,14 @@ export default function PraFaze() {
     }
   };
 
+  const handleDeleteLastTask = () => {
+    if (tarefas.length > 0) {
+      setTarefas([]);
+      setUncheckedTarefas(0);
+      setLastAddedTarefaIndex(-1);
+    }
+  };
+
   const tarefasCompletas = tarefas.filter((tarefa) => tarefa.completa).length;
 
   const handleCheckboxChange = (index: number) => {
@@ -67,6 +75,7 @@ export default function PraFaze() {
             />
             <button
             className='bg-terracota text-white text-xl border-0 rounded-lg p-2 mr-3 transition-transform transform hover:scale-110 active:scale-95'
+            onClick={handleDeleteLastTask}
             >Excluir
             </button>
           </div>
@@ -92,26 +101,32 @@ export default function PraFaze() {
           )}
           </div>
           <div className="flex justify-around items-center border-t border-terracota pt-4"> {/* Navbar */}
-            <div className="text-terracota"> itens restantes</div>
+            <div className="text-terracota">{uncheckedTarefas} itens restantes</div>
               <div>
                 <button
                   className="text-terracota px-3 transition-transform transform hover:scale-110 active:scale-95"
+                  onClick={() => setStatus("todas")}
                 >
                   Tudo
                 </button>
                 <button
                   className="text-terracota px-3 transition-transform transform hover:scale-110 active:scale-95"
+                  onClick={() => setStatus("incompletas")}
                 >
                   Pendentes
                 </button>
                 <button
                   className="text-terracota pl-3 pr-6 transition-transform transform hover:scale-110 active:scale-95"
+                  onClick={() => setStatus("completas")}
                 >
                   Finalizadas
                 </button>
               </div>
               <button
                 className="text-terracota transition-transform transform hover:scale-110 active:scale-95"
+                onClick={() => {
+                  setTarefas(tarefas.filter((tarefa) =>!tarefa.completa));
+                }}
               >
                 Limpar finalizadas
               </button>
