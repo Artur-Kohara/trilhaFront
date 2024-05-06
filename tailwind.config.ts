@@ -1,3 +1,5 @@
+/** @type {import('tailwindcss').Config} */
+const { addDynamicIconSelectors } = require('@iconify/tailwind');
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -13,8 +15,13 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        'terracota': '#DE6C5C'
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    addDynamicIconSelectors(),
+  ],
 };
 export default config;
